@@ -1,0 +1,57 @@
+{
+  "manifest_version": 3,
+  "name": "Пульт для Яндекс Музыки",
+  "version": "0.1.0",
+  "description": "Управляйте уже открытой Яндекс Музыкой из popup на любой вкладке. Неофициальное расширение.",
+  "minimum_chrome_version": "111",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "Пульт для Яндекс Музыки",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png"
+    }
+  },
+"background": {
+  "scripts": ["background.js"]
+},
+  "permissions": ["storage", "scripting"],
+  "host_permissions": [
+    "https://music.yandex.ru/*",
+    "https://music.yandex.com/*",
+    "https://music.yandex.by/*",
+    "https://music.yandex.kz/*",
+    "https://music.yandex.uz/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://music.yandex.ru/*",
+        "https://music.yandex.com/*",
+        "https://music.yandex.by/*",
+        "https://music.yandex.kz/*",
+        "https://music.yandex.uz/*"
+      ],
+      "js": ["main.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "https://music.yandex.ru/*",
+        "https://music.yandex.com/*",
+        "https://music.yandex.by/*",
+        "https://music.yandex.kz/*",
+        "https://music.yandex.uz/*"
+      ],
+      "js": ["selectors.js", "content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
